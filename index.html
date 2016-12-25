@@ -1,9 +1,7 @@
-<div id="hand">
-</div>
-
-<style>
-  body { margin: 0; }
-  #hand {
+<head>
+  <style>
+    body { margin: 0; }
+    #hand {
     position: absolute;
     left: 50%;
     top: 10%;
@@ -13,22 +11,26 @@
     margin-left: -5px;
     background: gray;
     border-radius: 2px;
-  }
-</style>
+    }
+  </style>
 
-<script>
+  <script>
+    var yearProgress = function(now) {
+      var yearStart = new Date(now.getFullYear(), 0, 1);
+      var year = new Date(now.getFullYear() + 1, 0, 1).getTime() - yearStart.getTime();
+      return (now.getTime() - yearStart.getTime()) / year;
+    }
+    
+    var setClock = function(now) {
+      document.getElementById("hand").style.transform = "scale(-1, 1) rotate(" + yearProgress(now) + "turn)"
+    }
+    
+    setTimeout(function() { setClock(new Date()) }, 100);    
+    setInterval(function() { setClock(new Date()) }, 5000);
+  </script>
+</head>
 
-  var yearProgress = function() {
-    var now = new Date()
-    var yearStart = new Date(now.getFullYear(), 0, 1);
-    var year = new Date(now.getFullYear() + 1, 0, 1).getTime() - yearStart.getTime();
-    return (now.getTime() - yearStart.getTime()) / year;
-  }
-  
-  var setClock = function() {
-    document.getElementById("hand").style.transform = "scale(-1, 1) rotate(" + yearProgress() + "turn)"
-  }
-
-  setClock();
-  setInterval(setClock, 5000);
-</script>
+<body>
+  <div id="hand">
+  </div>
+</body>
