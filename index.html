@@ -1,0 +1,36 @@
+<div id="face">
+  <div id="hand">
+  </div>
+</div>
+
+<style>
+  #face { width: 100%; height: 100%; position: absolute }
+  #hand {
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    height: 40%;
+    transform-origin: 50% 95%;
+    width: 10px;
+    margin-left: -5px;
+    background: gray;
+    border-radius: 2px;
+  }
+</style>
+
+<script>
+
+  var yearProgress = function() {
+    var now = new Date()
+    var yearStart = new Date(now.getFullYear(), 0, 1);
+    var year = new Date(now.getFullYear() + 1, 0, 1).getTime() - yearStart.getTime();
+    return (now.getTime() - yearStart.getTime()) / year;
+  }
+  
+  var setClock = function() {
+    document.getElementById("hand").style.transform = "rotate(-" + yearProgress() + "turn)"
+  }
+
+  setClock();
+  setInterval(setClock, 10);
+</script>
