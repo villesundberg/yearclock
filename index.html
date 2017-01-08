@@ -1,4 +1,5 @@
 <head>
+  <title></title>
   <style>
     body { margin: 0; }
     #hand {
@@ -22,7 +23,8 @@
     }
     
     var setClock = function(now) {
-      document.getElementById("hand").style.transform = "scale(-1, 1) rotate(" + yearProgress(now) + "turn)"
+      document.getElementById("hand").style.transform = "scale(-1, 1) rotate(" + yearProgress(now) + "turn)";
+      document.title = now.getFullYear() + "." + (yearProgress(now) + "").substring(2,6);
     }
     
     setTimeout(function() { setClock(new Date()) }, 100);    
